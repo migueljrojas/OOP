@@ -1,0 +1,16 @@
+div.header
+  .header__container
+    h1.header__logo
+      | ES6
+      span and beyond
+    nav.header__nav
+      each section in site.data.header
+        .header__nav-section
+          if !section.isSubSection
+            h2.header__nav-section-title= section.name
+          else
+            h3.header__sub-section-title= section.name
+          if section.topics
+            ul
+              each topic in section.topics
+                li.header__nav-item(id=topic.id)= topic.name

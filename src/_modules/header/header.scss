@@ -1,0 +1,90 @@
+.header {
+  position: fixed;
+  background: #212121;
+  left:0;
+  top:0;
+  bottom:0;
+  overflow: hidden;
+  width: 20vw;
+  padding: 20px 0 0 20px;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__logo {
+    margin: 0 0 30px;
+    color: $white;
+    font-weight: 900;
+    font-size: 72px;
+    border-bottom: 1px solid $darkGray;
+    padding-bottom: 30px;
+    flex-grow: 0;
+    line-height: 0.9;
+
+    span {
+      font-weight: 300;
+      font-size: 0.33em;
+      display: block;
+    }
+  }
+
+  &__nav {
+    flex-grow: 2;
+    overflow: auto;
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+      background-color: $darkGray;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: $darkGray;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $lightGray;
+    }
+  }
+
+  &__nav-section {
+    margin-bottom: 30px;
+  }
+
+  &__nav-section-title {
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0 0 15px;
+    color: $white;
+  }
+
+  &__sub-section-title {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 15px;
+    color: $white;
+  }
+
+  &__nav-item {
+    @include trans;
+
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    color: $lightGray;
+    cursor: pointer;
+
+    &:hover {
+      color: $white;
+      background: rgba(255,255,255,.1);;
+    }
+
+    &.js-active {
+      border-right: 5px solid $white;
+    }
+  }
+}
