@@ -13,4 +13,4 @@ div.header
           if section.topics
             ul
               each topic in section.topics
-                li.header__nav-item(id=topic.id)= topic.name
+                li.header__nav-item(data-target=topic.id)= topic.name

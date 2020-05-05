@@ -8,7 +8,7 @@
       },
       {
         "id":"es6-use",
-        "name":"Implementation"
+        "name":"ES6 Implementation"
       }
     ]
   },
@@ -36,8 +36,8 @@
         "name":"Default Params"
       },
       {
-        "id":"rest-operator",
-        "name":"Rest operator"
+        "id":"rest-param",
+        "name":"Rest params"
       },
       {
         "id":"spread-operator",

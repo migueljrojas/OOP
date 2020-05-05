@@ -1,0 +1,804 @@
+[
+  {
+    "id":"what-is-es6",
+    "name":"Intro",
+    "topic":"Qué es ES6?",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ECMAScript, es el estándar que define cómo debe de ser el lenguaje Javascript."
+      },
+      {
+        "type":"p",
+        "text": "Javascript es interpretado y procesado por multitud de plataformas, entre las que se encuentran los navegadores web, así como NodeJS y otros ámbitos más específicos como el desarrollo de aplicaciones para Windows y otros sistemas operativos. Todos los responsables de cada una de esas tecnologías se encargan de interpretar el lenguaje tal como dice el estándar ECMAScript."
+      },
+      {
+        "type":"p",
+        "text":"ECMAScript 6 también conocido como ECMAScript 2015 o ES6, marcó un antes y un después con su implementación, ya que introdujo una serie de features que mejoran el lenguaje tanto en performance como a nivel de uso para los desarrolladores. También, a partir de esta versión se fueron lanzando updates anuales en vez de major releases como fue el caso de ES6."
+      },
+      {
+        "type":"h3",
+        "text": "Soporte"
+      },
+      {
+        "type":"p",
+        "text":"Los principales navegadores ya implementan la mayoría de funcionalidades, si bien aún están en proceso de adaptación, por lo que es recomendable utilizar un transpilador como Babel para convertir nuestro elegante ES6 en ES5 (el JS antiguo), y asegurar que nuestro codigo se podrá ejecutar en todos los navegadores."
+      }
+    ]
+  },
+  {
+    "id":"es6-use",
+    "name":"Intro",
+    "topic":"ES6 Implementation",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Para poder comenzar a usar ES6 en cualquier proyecto, han surgido los transpiladores."
+      },
+      {
+        "type":"p",
+        "text": "Los transpiladores son programas capaces de traducir el código de un lenguaje para otro, o de una versión para otra. Por ejemplo, el código escrito en ES6, traducirlo a ES5, y de esta manera evitar problemas de compatibilidad."
+      },
+      {
+        "type":"p",
+        "text":"El transpilador se usa durante la fase de desarrollo. El transpilador convierte el código en un proceso de \"tradución/compilación = transpilación\". El código transpilado, compatible, es el que realmente se distribuye o se despliega para llevar a producción."
+      },
+      {
+        "type":"p",
+        "text":"Hoy tenemos transpiladores para traducir ES6 a ES5, siendo <strong>Babel</strong> la opción más utilizada, pero también los hay para traducir de otros lenguajes a Javascript, por ejemplo TypeScript, CoffeeScript o Flow, que una vez transpilados se convierten en Javascript ES5."
+      }
+    ]
+  },
+  {
+    "id":"let-const",
+    "name":"Features que introdujo ES6",
+    "topic":"Let y Const",
+    "contents":[
+      {
+        "type":"p",
+        "text":"En Javascript solo teníamos una forma de declarar variables. Se hacía con la palabra clave \"var\" seguida del nombre de variable a declarar (o variables separadas por comas):"
+      },
+      {
+        "type":"code",
+        "text":[
+          "var foo;",
+          "var baz,",
+          "bar,",
+          "zar;"
+        ]
+      },
+      {
+        "type":"p",
+        "text": "Las variables con \"var\" tenían el scope de la función donde fueron declaradas:"
+      },
+      {
+        "type":"code",
+        "text":[
+          "function () {",
+          "&ensp; console.log(miVar);",
+          "&ensp; if (true) {",
+          "&ensp; &ensp; var miVar = 'Hola mundo';",
+          "&ensp; }",
+          "&ensp; console.log(miVar);",
+          "};"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Si lo ponemos en ejecución el resultado que obtendremos en consola es el siguiente:"
+      },
+      {
+        "type":"code",
+        "text":[
+          "undefined",
+          "'Hola mundo'"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"ES6 introduce 2 nuevos tipos de variables, <strong>let</strong> y <strong>const</strong>. Entre sus características principales está que su scope está limitado al bloque al que fueron declaradas por lo que la ejecución de:"
+      },
+      {
+        "type":"code",
+        "text":[
+          "function () {",
+          "&ensp; console.log(miVar);",
+          "&ensp; if (true) {",
+          "&ensp; &ensp; let miVar = 'Hola mundo';",
+          "&ensp; }",
+          "&ensp; console.log(miVar);",
+          "};"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Resultaría en un error ya que miVar no existe en el block donde están ejecutados los console.logs."
+      },
+      {
+        "type":"h3",
+        "text":"Let:"
+      },
+      {
+        "type":"p",
+        "text":"La instrucción let declara una variable de alcance local con ámbito de bloque(block scope), la cual, opcionalmente, puede ser inicializada con algún valor, y cuyo valor puede ser sobreescrito posteriormente dentro del bloque en el cual fue declarada."
+      },
+      {
+        "type":"a",
+        "text":"Ver en MDN",
+        "link":"https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/let"
+      },
+      {
+        "type":"h3",
+        "text":"Const:"
+      },
+      {
+        "type":"p",
+        "text":"Las variables constantes presentan un ámbito de bloque (block scope) tal y como lo hacen las variables definidas usando la instrucción let, con la particularidad de que el valor de una constante no puede cambiarse a través de la reasignación. Las constantes no se pueden redeclarar."
+      },
+      {
+        "type":"a",
+        "text":"Ver en MDN",
+        "link":"https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/const"
+      }
+    ]
+  },
+  {
+    "id":"enhanced-obj-literals",
+    "name":"Features que introdujo ES6",
+    "topic":"Enhanced object Literals",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Se extendieron los Object literals para soportar las siguientes features: setear el prototype al momento de construir, shorthand para asignments tipo foo: foo, definir metodos, hacer llamadas al super, y computar nombres de propiedades con expresiones. Esto acerca los object literals a las class declarations, y permite que el diseño basado en objetos se beneficie de las mismas convenciones."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const obj = {",
+          "&ensp; /* __proto__ */",
+          "&ensp; __proto__: theProtoObj,",
+          "&ensp; /* Shorthand for ‘handler: handler’ */",
+          "&ensp; handler,",
+          "&ensp; /* Methods */",
+          "&ensp; toString() {",
+          "&ensp; /* Super calls */",
+          "&ensp; return 'd ' + super.toString();",
+          "&ensp; },",
+          "&ensp; /* Computed (dynamic) property names */",
+          "&ensp; [ 'prop_' + (() => 42)() ]: 42",
+          "};"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"template-literals",
+    "name":"Features que introdujo ES6",
+    "topic":"Template Literals",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Template strings literals funcionan como syntactic sugar para construir strings. Es similar a la interpolación de strings en Perl, Python y otros. Opcionalmente, una etiqueta puede ser agregada para permitir la personalización de la construcción dle string, previniendo injection attacks o construir estructurs de datos de alto nivel de los contenidos de una string."
+      },
+      {
+        "type":"code",
+        "text":[
+          "/* Basic literal string creation */",
+          "`In JavaScript '\\n' is a line-feed.`",
+          "\n",
+          "/* Multiline strings */",
+          "`In JavaScript this is",
+          "not legal.`",
+          "\n",
+          "/* String interpolation */",
+          "var name = 'Bob', time = 'today';",
+          "`Hello ${name}, how are you ${time}?`",
+          "\n",
+          "/* Construct an HTTP request prefix is used to interpret the replacements and construction */",
+          "POST`http://foo.org/bar?a=${a}&b=${b}",
+          "&ensp; Content-Type: application/json",
+          "&ensp; X-Credentials: ${credentials}",
+          "&ensp; { 'foo': ${foo},",
+          "&ensp; 'bar': ${bar}}`(myOnReadyStateChangeHandler);"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"arrow-functions",
+    "name":"Features que introdujo ES6",
+    "topic":"Arrow Functions",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Arrows are a function shorthand using the => syntax. They are syntactically similar to the related feature in C#, Java 8 and CoffeeScript. They support both statement block bodies as well as expression bodies which return the value of the expression. Unlike functions, arrows share the same lexical this as their surrounding code."
+      },
+      {
+        "type":"code",
+        "text":[
+          "/* Expression bodies */",
+          "const odds = evens.map(v => v + 1);",
+          "const nums = evens.map((v, i) => v + i);",
+          "const pairs = evens.map(v => ({even: v, odd: v + 1}));",
+          "\n",
+          "/* Statement bodies */",
+          "nums.forEach(v => {",
+          "&ensp; if (v % 5 === 0)",
+          "&ensp; &ensp; fives.push(v);",
+          "});",
+          "\n",
+          "/* Lexical this */",
+          "const bob = {",
+          "&ensp; _name: 'Bob',",
+          "&ensp; _friends: [],",
+          "&ensp; printFriends() {",
+          "&ensp; &ensp; this._friends.forEach(f =>",
+          "&ensp; &ensp; &ensp; console.log(this._name + ' knows ' + f));",
+          "&ensp; }",
+          "}"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"default-params",
+    "name":"Features que introdujo ES6",
+    "topic":"Default Params",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Para definir los valores predeterminados de los parámetros, realizamos una asignación de esos valores a los parámetros en la cabecera de la función:"
+      },
+      {
+        "type":"code",
+        "text":[
+          "function sayHi(name = 'Mike') {",
+          "&ensp; console.log('Hi ' + name);",
+          "}"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Esta función recibe un parámetro llamado \"nombre\", con un valor predeterminado. Este valor se asignará en caso que al invocar a la función no le pasemos nada. Ejecutar <strong>sayHi()</strong> imprime 'Hola Mike' en consola, mientras que <strong>sayHi('Juan')</strong> imprime 'Hola Juan'"
+      }
+    ]
+  },
+  {
+    "id":"rest-param",
+    "name":"Features que introdujo ES6",
+    "topic":"Rest Params",
+    "contents":[
+      {
+        "type":"p",
+        "text":"La sintaxis de los parámetros rest nos permiten representar un número indefinido de argumentos como un array."
+      },
+      {
+        "type":"p",
+        "text":"El último parámetro de una función se puede prefijar con ..., lo que hará que todos los argumentos restantes (suministrados por el usuario) se coloquen dentro de un array de javascript \"estándar\". Sólo el último parámetro puede ser un \"parámetro rest\"."
+      },
+      {
+        "type":"code",
+        "text":[
+          "function myFun(a, b, ...manyMoreArgs) {",
+          "  console.log('a', a); ",
+          "  console.log('b', b);",
+          "  console.log('manyMoreArgs', manyMoreArgs); ",
+          "}",
+          "\n",
+          "myFun('one', 'two', 'three', 'four', 'five', 'six');",
+          "\n",
+          "// Console Output:",
+          "// a, one",
+          "// b, two",
+          "// manyMoreArgs, [three, four, five, six]"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"spread-operator",
+    "name":"Features que introdujo ES6",
+    "topic":"Spread Operator",
+    "contents":[
+      {
+        "type":"p",
+        "text":"La sintaxis extendida o spread sintax permite a un elemento iterable, tal como un array, ser expandido en lugares donde cero o más argumentos (para llamadas de función) ó elementos (para Array literales) son esperados."
+      },
+      {
+        "type":"code",
+        "text":[
+          "function sum(x, y, z) {",
+          "&ensp; return x + y + z;",
+          "}",
+          "\n",
+          "const numbers = [1, 2, 3];",
+          "\n",
+          "console.log(sum(...numbers));",
+          "// expected output: 6"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Expandir array literals"
+      },
+      {
+        "type":"p",
+        "text":"Sin sintáxis expandida (spread sintax), para crear un nuevo arreglo usando un arreglo existente como parte de él,no es suficiente la sintaxis de Array literal y en su lugar se debe usar código imperativo con una combinación de push, splice, concat, etc. Con la sintáxis expandida, esto se vuelve mucho mas practico:"
+      },
+      {
+        "type":"code",
+        "text":[
+          "var parts = ['shoulders', 'knees']; ",
+          "var lyrics = ['head', ...parts, 'and', 'toes'];",
+          "// ['head', 'shoulders', 'knees', 'and', 'toes']"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Copiar un array"
+      },
+      {
+        "type":"code",
+        "text":[
+          "var arr = [1, 2, 3];",
+          "var arr2 = [...arr]; // like arr.slice()",
+          "arr2.push(4); ",
+          "\n",
+          "// arr2 becomes [1, 2, 3, 4]",
+          "// arr remains unaffected"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Concatenar Arrays"
+      },
+      {
+        "type":"code",
+        "text":[
+          "var arr1 = [0, 1, 2];",
+          "var arr2 = [3, 4, 5];",
+          "arr1 = [...arr1, ...arr2];",
+          "// arr1 is now [0, 1, 2, 3, 4, 5] Similar to arr1.concat(arr2)"
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "var arr1 = [0, 1, 2];",
+          "var arr2 = [3, 4, 5];",
+          "arr1 = [...arr2, ...arr1];",
+          "// arr1 is now [3, 4, 5, 0, 1, 2] Similar to Array.prototype.unshift.apply(arr1, arr2)"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"object-array-destructuring",
+    "name":"Features que introdujo ES6",
+    "topic":"Object / Array destructuring",
+    "contents":[
+      {
+        "type":"p",
+        "text":"la sintaxis de destructuring assignment es una expresión que posibilita la extracción de datos de arrays, o de propiedades de objetos, en variables distintas."
+      },
+      {
+        "type":"code",
+        "text":[
+          "let a, b, rest;",
+          "[a, b] = [10, 20];",
+          "\n",
+          "console.log(a);",
+          "// expected output: 10",
+          "\n",
+          "console.log(b);",
+          "// expected output: 20",
+          "\n",
+          "[a, b, ...rest] = [10, 20, 30, 40, 50];",
+          "\n",
+          "console.log(rest);",
+          "// expected output: Array [30,40,50]"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Asignación de Variables"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const foo = ['uno', 'dos', 'tres'];",
+          "const [rojo, amarillo, verde] = foo;",
+          "console.log(rojo); // 'uno'",
+          "console.log(amarillo); // 'dos'",
+          "console.log(verde); // 'tres'"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Valores predeterminados"
+      },
+      {
+        "type":"code",
+        "text":[
+          "let a, b;",
+          "\n",
+          "[a=5, b=7] = [1];",
+          "console.log(a); // 1",
+          "console.log(b); // 7"
+        ]
+      },
+      {
+        "type":"h3",
+        "text":"Object Destructuring"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const o = {p: 42, q: true};",
+          "const {p, q} = o;",
+          "\n",
+          "console.log(p); // 42",
+          "console.log(q); // true"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Asignación a nuevos nombres de variables"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const o = {p: 42, q: true};",
+          "const {p: foo, q: bar} = o;",
+          "\n",
+          "console.log(foo); // 42 ",
+          "console.log(bar); // true"
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Valores predeterminados"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const {a = 10, b = 5} = {a: 3};",
+          "\n",
+          "console.log(a); // 3",
+          "console.log(b); // 5"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"es6-modules",
+    "name":"Features que introdujo ES6",
+    "topic":"ES6 Modules",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ES6 introdujo soporte modular para la definición de componentes. Codifica patrones de module loaders populares de JavaScript como AMD y CommonJS. El comportamiento en runtime behaviour es definido por un default loader. Asincronismo implícito – el código no se ejecuta hasta que los módulos requeridos están disponibles y procesados."
+      },
+      {
+        "type":"code",
+        "text":[
+          "// lib/math.js",
+          "\n",
+          "export function sum(x, y) {",
+          "&ensp; return x + y;",
+          "}",
+          "export var pi = 3.141593;"
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "// app.js",
+          "\n",
+          "import * as math from 'lib/math';",
+          "alert('2π = ' + math.sum(math.pi, math.pi));"
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "// otherApp.js",
+          "import {sum, pi} from 'lib/math';",
+          "alert('2π = ' + sum(pi, pi));"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"es6-promises",
+    "name":"Features que introdujo ES6",
+    "topic":"Promises",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ES6 introdujo la API de promesas de forma nativa. El objeto Promise (Promesa) es usado para computaciones asíncronas. Una promesa representa un valor que puede estar disponible ahora, en el futuro, o nunca."
+      },
+      {
+        "type":"h4",
+        "text":"Estados"
+      },
+      {
+        "type":"ul",
+        "text": [
+          "<strong>Pendiente (pending):</strong> estado inicial, no cumplida o rechazada.",
+          "<strong>Cumplida (fulfilled):</strong> significa que la operación se completó satisfactoriamente.",
+          "<strong>Rechazada (rejected):</strong> significa que la operación falló."
+        ]
+      },
+      {
+        "type":"h4",
+        "text":"Métodos"
+      },
+      {
+        "type":"ul",
+        "text": [
+          "<strong>Promise.all</strong>",
+          "<strong>Promise.race</strong>",
+          "<strong>Promise.reject</strong>.",
+          "<strong>Promise.resolve</strong>."
+        ]
+      }
+    ]
+  },
+  {
+    "id":"es6-classes",
+    "name":"Features que introdujo ES6",
+    "topic":"Classes",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ES6 classes son syntactic sugar sobre el patrón orientado a objetos basado en prototipos. El patrón de clases es fácil de usar por su forma simple y declarativa de implementar, y favorece la interoperabilidad. Las Classes soportan herencia prototipada, super calls, instancias y métodos static y constructores."
+      },
+      {
+        "type":"code",
+        "text":[
+          "class SkinnedMesh extends THREE.Mesh {",
+          "&ensp; constructor(geometry, materials) {",
+          "&ensp; &ensp; super(geometry, materials);",
+          "\n",
+          "&ensp; &ensp; this.idMatrix = SkinnedMesh.defaultMatrix();",
+          "&ensp; &ensp; this.bones = [];",
+          "&ensp; &ensp; this.boneMatrices = [];",
+          "&ensp; &ensp; //...\n",
+          "&ensp; }",
+          "&ensp; update(camera) {",
+          "&ensp; &ensp; //...\n",
+          "&ensp; &ensp; super.update();",
+          "&ensp; }",
+          "&ensp; get boneCount() {",
+          "&ensp; &ensp; return this.bones.length;",
+          "&ensp; }",
+          "&ensp; set matrixType(matrixType) {",
+          "&ensp; &ensp; this.idMatrix = SkinnedMesh[matrixType]();",
+          "&ensp; }",
+          "&ensp; static defaultMatrix() {",
+          "&ensp; &ensp; return new THREE.Matrix4();",
+          "&ensp; }",
+          "}"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"map-set-weakmap-weakset",
+    "name":"Features que introdujo ES6",
+    "topic":"map + set + weakmap + weakset",
+    "contents":[
+      {
+        "type":"p",
+        "text":"También se introdujeron estas eficientes estructuras de datos para patrones o algortimos comunes. "
+      },
+      {
+        "type":"ul",
+        "text":[
+          "<strong>Set</strong> El objeto Set permite almacenar valores únicos de cualquier tipo, incluso valores primitivos u referencias a objetos.",
+          "<strong>Map</strong> El objeto Map almacena pares clave/valor. Cualquier valor (tanto objetos como valores primitivos) pueden ser usados como clave o valor.",
+          "<strong>WeakSet</strong> El objeto WeakSet te deja almacenar y mantener objectos debilmente en una colección.",
+          "<strong>WeakMap</strong> El objeto WeakMap es una colección de pares clave/valor en la que las claves son objetos y los valores son valores arbitrarios."
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "// Sets\n",
+          "var s = new Set();",
+          "s.add('hello').add('goodbye').add('hello');",
+          "s.size === 2;",
+          "s.has('hello') === true;",
+          "\n",
+          "// Maps\n",
+          "var m = new Map();",
+          "m.set('hello', 42);",
+          "m.set(s, 34);",
+          "m.get(s) == 34; "
+        ]
+      }
+    ]
+  },
+  {
+    "id":"math-number-string-array-objAPI",
+    "name":"Features que introdujo ES6",
+    "topic":"math + number + string + array + object APIs",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Fueron agregadas varias librerías, entre ellas la librería Math, helpers para la conversión de Arrays, String helpers, y Object.assign para copiar objetos."
+      },
+      {
+        "type":"code",
+        "text":[
+          "Number.EPSILON",
+          "Number.isInteger(Infinity) // false\n",
+          "Number.isNaN('NaN') // false\n",
+          "\n",
+          "Math.acosh(3) // 1.762747174039086\n",
+          "Math.hypot(3, 4) // 5\n",
+          "Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2\n",
+          "\n",
+          "'abcde'.includes('cd') // true\n",
+          "'abc'.repeat(3) // 'abcabcabc'\n",
+          "\n",
+          "Array.from(document.querySelectorAll('*')) // Returns a real Array\n",
+          "Array.of(1, 2, 3) // Similar to new Array(...), but without special one-arg behavior\n",
+          "[0, 0, 0].fill(7, 1) // [0,7,7]\n",
+          "[1, 2, 3].find(x => x == 3) // 3\n",
+          "[1, 2, 3].findIndex(x => x == 2) // 1\n",
+          "[1, 2, 3, 4, 5].copyWithin(3, 0) // [1, 2, 3, 1, 2]\n",
+          "['a', 'b', 'c'].entries() // iterator [0, 'a'], [1,'b'], [2,'c']\n",
+          "['a', 'b', 'c'].keys() // iterator 0, 1, 2\n",
+          "['a', 'b', 'c'].values() // iterator 'a', 'b', 'c'\n",
+          "\n",
+          "Object.assign(Point, { origin: new Point(0,0) })"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"array-includes",
+    "name":"Modern Features - ES7",
+    "topic":"Array.prototype.includes()",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Array.prototype.includes() verifica en el array la existencia del valor pasado como argumento. Devuelve true si el array contiene el valor, o sino, devuelve false."
+      },
+      {
+        "type":"p",
+        "text":"Antes, había que usar Array.prototype.indexOf() para verificar que un elemento existiera en un array."
+      },
+      {
+        "type":"code",
+        "text":[
+          "let numbers = [1, 2, 3, 4];",
+          "if(numbers.includes(2)) {  console.log('Array contains value'); }",
+          "//Expected output: true"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"exponentiation-operator",
+    "name":"Modern Features - ES7",
+    "topic":"Exponentiation operator",
+    "contents":[
+      {
+        "type":"p",
+        "text":"JavaScript ya soportaba operadores aritméticos como +, -, * y más. ECMAScript 2016 introdujo el operador exponencial **."
+      },
+      {
+        "type":"p",
+        "text":"Tiene el mismo propósito que Math.pow(). Devuelve el primer argumento elevado a la potencia del segundo argumento."
+      },
+      {
+        "type":"code",
+        "text":[
+          "let base = 3;let exponent = 4; let result = base**exponent;",
+          "console.log(result); //81"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"async-func",
+    "name":"Modern Features - ES8",
+    "topic":"Async Functions",
+    "contents":[
+      {
+        "type":"p",
+        "text":"La declaración de función async define una función asíncrona, la cual devuelve un objeto AsyncFunction."
+      },
+      {
+        "type":"p",
+        "text":"Es posible definir también funciones asíncronas a través de una expresión de función async."
+      },
+      {
+        "type":"p",
+        "text":"La finalidad de las funciones async/await es simplificar el comportamiento del uso síncrono de promesas y realizar algún comportamiento específico en un grupo de Promises. Del mismo modo que las Promises son semejantes a las devoluciones de llamadas estructuradas, async/await se asemejan a una combinación de generadores y promesas."
+      },
+      {
+        "type":"code",
+        "text":[
+          "function resolveAfter2Seconds(x) {",
+          "&ensp; return new Promise(resolve => {",
+          "&ensp; &ensp; setTimeout(() => {",
+          "&ensp; &ensp; &ensp; resolve(x);",
+          "&ensp; &ensp; }, 2000);",
+          "&ensp; });",
+          "}",
+          "",
+          "async function add1(x) {",
+          "&ensp; const a = await resolveAfter2Seconds(20);",
+          "&ensp; const b = await resolveAfter2Seconds(30);",
+          "&ensp; return x + a + b;",
+          "}",
+          "",
+          "add1(10).then(v => {",
+          "&ensp; console.log(v);  // prints 60 after 4 seconds.\n",
+          "});",
+          "",
+          "async function add2(x) {",
+          "&ensp; const p_a = resolveAfter2Seconds(20);",
+          "&ensp; const p_b = resolveAfter2Seconds(30);",
+          "&ensp; return x + await p_a + await p_b;",
+          "}",
+          "",
+          "add2(10).then(v => {",
+          "&ensp; console.log(v);  // prints 60 after 2 seconds.\n",
+          "});"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"objct-values-entries",
+    "name":"Modern Features - ES8",
+    "topic":"Object.values / entries",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ES8 introdujo dos nuevos métodos a la API de objetos; <strong>Object.values()</strong> y <strong>Object.entries()</strong>."
+      },
+      {
+        "type":"p",
+        "text":"<strong>Object.values()</strong> retorna un array de las propiedades enumerables de un objeto dado. Es la contraparte de Object.keys()"
+      },
+      {
+        "type":"p",
+        "text":"<strong>Object.entries()</strong> retorna un array que contiene pares key/value del objeto dado como un array."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const object1 = {",
+          "&ensp; a: 'somestring',",
+          "&ensp; b: 42,",
+          "&ensp; c: false",
+          "};",
+          "",
+          "console.log(Object.values(object1));",
+          "// expected output: Array ['somestring', 42, false]\n",
+          "\n",
+          "const object1 = {",
+          "&ensp; a: 'somestring',",
+          "&ensp; b: 42",
+          "};",
+          "\n",
+          "for (let [key, value] of Object.entries(object1)) {",
+          "&ensp; console.log(`${key}: ${value}`);",
+          "}",
+          "\n",
+          "// expected output:\n",
+          "// 'a: somestring'\n",
+          "// 'b: 42'\n"
+        ]
+      }
+    ]
+  }
+]
+
+

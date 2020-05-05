@@ -47,7 +47,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: $lightGray;
+      background-color: $midGray;
     }
   }
 
@@ -72,9 +72,7 @@
   &__nav-item {
     @include trans;
 
-    padding: 0 10px;
-    height: 30px;
-    line-height: 30px;
+    padding: 5px 10px;
     color: $lightGray;
     cursor: pointer;
 
@@ -84,7 +82,7 @@
     }
 
     &.js-active {
-      border-right: 5px solid $white;
+      border-left: 5px solid $white;
     }
   }
 }

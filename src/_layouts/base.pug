@@ -16,6 +16,7 @@ head
   link(rel='icon', type='image/x-icon', href='/favicon.ico')
   block stylesheets
     link(rel='stylesheet', href= baseUrl + 'styles/main.css')
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/default.min.css")
 
 body
   <!--[if lt IE 11]>
@@ -31,5 +32,6 @@ body
     script(src= baseUrl + 'scripts/main.js')
     script(src="//cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js")
     script new WOW().init();
-
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/highlight.min.js")
+    script hljs.initHighlightingOnLoad();
 </html>

@@ -4,12 +4,31 @@ include _modules/link/link
 
 block content
   main.content
-    .yeogurt-info
-      h1 Welcome to Yeogurt!
-      p.
-        Take a look at the
-        #[+link({text: 'documentation'})(href='https://github.com/larsonjj/generator-yeogurt#yeogurt-generator---')]
-        and start mixing up something awesome.
-      p
-        img.logo(src="images/yeogurt-swirl.png", width="75px")
-    code.version v3.1.2
+    .content__wrapper
+      each section in site.data.content
+        section.content__section(data-content=section.id)
+          span.content__section-index= section.name
+          h2.content__section-title= section.topic
+          .content__section-contents
+            each item in section.contents
+              if item.type == 'p'
+                p!= item.text
+              if item.type == 'ul'
+                ul
+                  each line in item.text
+                    li!= line
+              if item.type == 'h3'
+                h3!= item.text
+              if item.type == 'h4'
+                h4!= item.text
+              if item.type == 'a'
+                a(href=item.link, target="_blank")!= item.text
+              if item.type == 'code'
+                pre
+                  code.javascript
+                    each line in item.text
+                      | !{line}
+                      br
+
+
+
