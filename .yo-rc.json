@@ -1,0 +1,12 @@
+{
+  "generator-yeogurt": {
+    "config": {
+      "projectName": "ES6 and beyond",
+      "htmlOption": "pug",
+      "cssOption": "sass",
+      "sassSyntax": "scss",
+      "testFramework": "none"
+    },
+    "version": "3.1.2"
+  }
+}
