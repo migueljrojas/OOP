@@ -798,7 +798,271 @@
         ]
       }
     ]
+  },
+  {
+    "id":"async-iteration",
+    "name":"Modern Features - ES9",
+    "topic":"Asynchronous Iteration",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Synchronous iteration was introduced with ES6 and have the following components:"
+      },
+      {
+        "type":"ul",
+        "text":[
+          "<strong>Iterable:</strong> Is an object that can be iterated via a method with key Symbol.iterator",
+          "<strong>Iterator:</strong> An object returned by [Symbol.iterator](). It has a method .next() that returns the next element.",
+          "<strong>NextElement:</strong> Is the object returned by .next() that has 2 properties:",
+          "<strong>value:</strong> Contains the value to be used.",
+          "<strong>done:</strong> Is a boolean that becomes true after the last element."
+        ]
+      },
+      {
+        "type":"p",
+        "text":"ES2018 specifies a new protocol for async iteration, which allows us to await for an asynchronous fetched value:"
+      },
+      {
+        "type":"ul",
+        "text":[
+          "Async iterables are marked via Symbol.asyncIterator.",
+          "Method .next() of an async iterator returns a Promise or NextElement."
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "for await (const coinValue of fetchCoinValues(['ETH','XMR','BTC','LTC','BAT'])) {",
+          "&ensp; console.log(coinValue);",
+          "}"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"rest-spread-properties",
+    "name":"Modern Features - ES9",
+    "topic":"Rest/Spread Properties",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Hasta ahora, los operadores Spread y Rest estaban solo disponibles para destructuring de arrays y definición de parámetros. ES9 Introdujo la posibilidad de usarlos para destructuring de objects y object literals."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const obj = {foo: 1, bar: 2, baz: 3};",
+          "const {foo, ...rest} = obj;\n",
+          "&ensp; // Same as:",
+          "&ensp; // const foo = 1;",
+          "&ensp; // const rest = {bar: 2, baz: 3};"
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "const obj = {foo: 1, bar: 2, baz: 3};",
+          "const newObj {...obj, qux: 4}",
+          "console.log(newObj);",
+          "&ensp; // output expected: { foo: 1, bar: 2, baz: 3, qux: 4 }"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"promise-finally",
+    "name":"Modern Features - ES9",
+    "topic":"Promise.finally",
+    "contents":[
+      {
+        "type":"p",
+        "text":"ES9 introdujo un nuevo callback en la API de promises que es llamado siempre, sin importar si then o catch fueron llamados. <strong>.finally</strong> es util cuando necesitas algo de limpieza al terminar una operación, haya sido exitosa o no, por ejemplo para cerrar una conexión."
+      },
+      {
+        "type":"code",
+        "text":[
+          "fetch(url)",
+          "&ensp; .then()",
+          "&ensp; .catch()",
+          "&ensp; .finally(() => console.log(`I'm always called!`));"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"array-flattening",
+    "name":"Modern Features - ES10",
+    "topic":"Array.flat() & Array.flatMap()",
+    "contents":[
+      {
+        "type":"p",
+        "text":"El método flat() crea un nuevo array con todos los elementos sub-array concatenados en el a la profundidad especificada. El método flatMap() mapea cada elemento utilizando una función y aplana el resultado en un nuevo array."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const fruits = [[\"🍋\", \"🍌\"], [\"🍎\", \"🍏\"], [\"🍐\", \"🍑\"]];\n",
+          "const flatFruits = friuts.flat(); // Default flat level is 1\n",
+          "console.log(flatFruits);\n",
+          "// [\"🍋\", \"🍌\", \"🍎\", \"🍏\", \"🍐\", \"🍑\"];"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"object-fromEntries",
+    "name":"Modern Features - ES10",
+    "topic":"Object.fromEntries()",
+    "contents":[
+      {
+        "type":"p",
+        "text":"El nuevo método agregado al prototipo de objeto .fromEntries() transforma una lista de pares key/value en un objeto"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const fruitEntries = [",
+          "&ensp; ['🍋', 'Lemon']",
+          "&ensp; ['🍌', 'Banana']",
+          "&ensp; ['🍎', 'Red Apple']",
+          "&ensp; ['🍏', 'Green Apple']",
+          "&ensp; ['🍐', 'Pear']",
+          "&ensp; ['🍑', 'Peach']",
+          "];",
+          "const fruitsObject = Object.fromEntries(fruitEntries); \n",
+          "console.log(fruitsObject);",
+          "// {",
+          "// &ensp; '🍋': 'Lemon',",
+          "// &ensp; '🍌': 'Banana',",
+          "// &ensp; '🍎': 'Red Apple',",
+          "// &ensp; '🍏': 'Green Apple',",
+          "// &ensp; '🍐': 'Pear',",
+          "// &ensp; '🍑': 'Peach'",
+          "// };"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"trim-start-end",
+    "name":"Modern Features - ES10",
+    "topic":"TrimStart() and TrimEnd()",
+    "contents":[
+      {
+        "type":"p",
+        "text":"El método trimStart() remueve los espacios en blancl al principio del string. El método trimEnd() method hace lo propio al final del string."
+      },
+      {
+        "type":"code",
+        "text":[
+          "let greeting = \"     Space around     \"; \n",
+          "greeting.trimEnd();   // \"     Space around\"; \n",
+          "greeting.trimStart(); // \"Space around     \";"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"optional-chaining",
+    "name":"Modern Features - ES11",
+    "topic":"Optional Chaining Operator",
+    "contents":[
+      {
+        "type":"p",
+        "text":"El operador de Optional Chaining <strong>?</strong> permite verificar si las propiedades de un objeto existen antes de acceder a su valor, y devuelve <strong>undefined</strong> en caso de que la propiedad no exista. Anteriormente esta situación hubiese provocado una excepción y romper el flujo de la aplicación."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const car = { type: { traction: 'double' }}; \n",
+          "const car2 = { brand: 'XXXXX'}; \n",
+          "console.log(car.type.traction);   // \"double\"; \n",
+          "console.log(car2.type.traction);   // \"Uncaught Exception: cannot read property 'traction' of undefined \"; \n",
+          "console.log(car2.type?.traction);   // undefined"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"nullish-coalescing-operator",
+    "name":"Modern Features - ES11",
+    "topic":"Nullish Coalescing Operator",
+    "contents":[
+      {
+        "type":"p",
+        "text":"El operador de nullish coalescing <strong>??</strong> verifica si una propiedad es <strong>undefined</strong> o <strong>null</strong>, y no todos los valores falsy. Si no es null o undefined, retornará el valor inicial o el valor de la propiedad."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const user = {",
+          "&ensp; profile: {",
+          "&ensp;&ensp; name: ''",
+          "&ensp;&ensp; age: 22",
+          "&ensp; }",
+          "} \n",
+          "console.log(user.profile.name || 'Mike'); // Mike \n",
+          "console.log(user.profile.name ?? 'Mike'); // ''"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"globalthis",
+    "name":"Modern Features - ES11",
+    "topic":"globalThis",
+    "contents":[
+      {
+        "type":"code",
+        "text":[
+          "console.log(window);",
+          "console.log(self);",
+          "console.log(frames);",
+          "console.log(this);"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Todos estos métodos devuelven el mismo objeto <strong>window</strong>. Pero si estás usando un webworker, solo 'self' va a servir, y si estás en Node.js, tienes un objeto separado llamado 'global' pero no puedes acceder a window. Para evitar estos objetos globales especificos de cada plataforma, JavaScript decidió agregar el globalThis, que va a funcionar en todas las plataformas."
+      },
+      {
+        "type":"code",
+        "text":[
+          "console.log(globalThis);"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"dynamic-imports",
+    "name":"Modern Features - ES11",
+    "topic":"Dynamic Imports",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Dynamic import() devuelve una promesa para el objeto namespace del modulo solicitado. Y así, los imports pueden ser asignados a una variable utilizando async/await."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const helperModule = './helper.js';",
+          "import(helperModule).then(module => {",
+          "&ensp; module.doStuff1();",
+          "&ensp; module.doStuff2();",
+          "}); \n",
+          "// Or \n",
+          "(async function importCheck() {",
+          "&ensp; const helperModule = './helper.js';",
+          "&ensp; const module = await import(helperModule);",
+          "&ensp; module.doStuff1();",
+          "&ensp; module.doStuff2();",
+          "}) ();"
+        ]
+      }
+    ]
   }
 ]
+
+
 
 
