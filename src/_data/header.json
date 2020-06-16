@@ -157,6 +157,27 @@
         "name":"Dynamic Imports"
       }
     ]
+  },
+  {
+    "name":"Pureza de funciones",
+    "topics":[
+      {
+        "id":"fp-conceptos-preliminares",
+        "name":"Conceptos Preliminares"
+      },
+      {
+        "id":"fp-funcion-pura",
+        "name":"Funciones Puras"
+      },
+      {
+        "id":"fp-funcion-impura",
+        "name":"Funciones Impuras"
+      },
+      {
+        "id":"fp-funcion-superior",
+        "name":"Funciones de Orden Superior"
+      }
+    ]
   }
 ]
 

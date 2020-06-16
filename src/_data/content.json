@@ -1060,6 +1060,451 @@
         ]
       }
     ]
+  },
+  {
+    "id":"fp-conceptos-preliminares",
+    "name":"Pureza de funciones",
+    "topic":"Conceptos preliminares",
+    "contents":[
+      {
+        "type":"h2",
+        "text":"Definición"
+      },
+      {
+        "type":"p",
+        "text":"En programación se le denomina función a una rutina declarada, que se ejecuta al llamarla."
+      },
+      {
+        "type":"p",
+        "text":"En Javascript, la función es un elemento de referencia, y como tal es una herencia de Object"
+      },
+      {
+        "type":"h2",
+        "text":"Declaración y almacenamiento"
+      },
+      {
+        "type":"p",
+        "text":"Las funciones tienen tres formas de ser declaradas en Javascript"
+      },
+      {
+        "type":"ul",
+        "text":[
+          "Con palabra clave <strong>function</strong>, en cuyo bloque se crea un nuevo ambiente léxico, y se desempeña dentro del que se hace la declaración, con lo que hereda variables",
+          "Forma de flecha <strong>x => x + 1</strong>, que solo es expresión, no es un constructor. Por lo que no crea ambiente léxico y por tanto no puede instanciarse",
+          "<strong>new Function(body)</strong>, crea su ambiente, pero se desarrolla en el ambiente superior (window). Tiene mal desempeño."
+        ]
+      },
+      {
+        "type":"p",
+        "text":"La declaración es un valor que se almacena como referencia, por lo que aplica las condiciones de puntero aplicable a objetos"
+      },
+      {
+        "type":"h2",
+        "text":"Ámbito léxico, bloque y alcance"
+      },
+      {
+        "type":"p",
+        "text":"Todo bloque y expresión hereda las declaraciones de su contenedor."
+      },
+      {
+        "type":"p",
+        "text":"Las variables declaradas por la sintaxis <strong>var</strong> se extiende a todo el ámbito léxico, mientras que las declaradas con <strong>let</strong> y <strong>const</strong> tienen un alcance a nivel de bloque."
+      },
+      {
+        "type":"h2",
+        "text":"Estado"
+      },
+      {
+        "type":"p",
+        "text":"El valor de una variable con alcance a la función, en determinado momento de la rutina."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const stepper = () => {",
+          "&ensp; let count = 0;",
+          "&ensp; return () => count++;",
+          "}); \n",
+          "const counter = stepper();",
+          "counter();"
+        ]
+      },
+      {
+        "type":"code",
+        "text":[
+          "function Stepper() {",
+          "&ensp; this.count = 0;",
+          "}",
+          "const Counter = new Stepper();",
+          "Counter.increment();"
+        ]
+      },
+      {
+        "type":"h2",
+        "text":"Mutabilidad"
+      },
+      {
+        "type":"p",
+        "text":"Cambio de valor en una variable. En los tipos primitivos, el valor se cambia directamente en memoria."
+      },
+      {
+        "type":"p",
+        "text":"En los tipos de referencia, el cambio se hace en el <i>Heap</i>."
+      },
+      {
+        "type":"h2",
+        "text":"Clonado"
+      },
+      {
+        "type":"p",
+        "text":"Creación de una nueva variable con sus valores, a partir de otra variable. En los tipos primitivos, la sola declaración crea una nueva variable"
+      },
+      {
+        "type":"code",
+        "text":[
+          "const a = 3;",
+          "const b = a;",
+          "b = 2;",
+          "console.log(a, b); // 3, 2"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"En los tipos de referencia, el clonado es más complejo, y las formas sencillas son limitadas."
+      },
+      {
+        "type":"code",
+        "text":[
+          "const o1 = {a: 1, b: {c:2, d: new Date(), r: /\\d/i }};",
+          "const o2 = {...o1} /* copia en forma superficial, en profundidad se mantiene la referencia */",
+          "o2.b.c = 5;",
+          "console.log(o1.b); /* {c:5, d:3};*/",
+          "const o3 = Object.assign({}, o1); /* también copia superficial */",
+          "const o4 = Object.fromEntries(Object.entries(o1)); /* también copia superficial*/",
+          "const o5 = JSON.parse(JSON.stringify(o1)); /* no rinde muy bien. Pierde o deforma algunos tipos de datos; */",
+          "console.log(o5.b.d, o5.b.r); /* @string, {} */"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Se pueden usar librerías que tienen recursividad para detección de tipos"
+      },
+      {
+        "type":"code",
+        "text": ["const o5 = _.cloneDeep(o1);"]
+      },
+      {
+        "type":"a",
+        "text":"algoritmo de lodash",
+        "link":"https://github.com/lodash/lodash/blob/master/.internal/baseClone.js"
+      },
+      {
+        "type":"p",
+        "text":"En Node, V8 tiene la posibilidad de serializar/deserializar"
+      },
+      {
+        "type":"code",
+        "text": ["const o6 = v8.deserialize(v8.serialize(o1));"]
+      },
+      {
+        "type":"p",
+        "text":"O se puede usar una solución bastante fea, aprovechando el algoritmo de clonado estructurado"
+      },
+      {
+        "type":"a",
+        "text":"clonado estructurado",
+        "link":"https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm"
+      },
+      {
+        "type":"code",
+        "text": [
+          "function structuredClone(obj) {",
+          "&ensp; const oldState = history.state;",
+          "&ensp; history.replaceState(obj, window.title);",
+          "&ensp; const copy = history.state;",
+          "&ensp; history.replaceState(oldState, window.title);",
+          "&ensp; return copy;",
+          "}",
+          "const o7 = structuredClone(o1);",
+          "console.log(o7.b.d); /* @Date */"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"También hay otra forma fea, menos compatible y asíncrona, pero rinde mejor"
+      },
+      {
+        "type":"code",
+        "text": [
+          "function asyncClone(obj) {",
+          "&ensp; return new Promise(res => {",
+          "&ensp;&ensp; const {port1, port2} = new MessageChannel();",
+          "&ensp;&ensp; port2.onmessage = ev => res(ev.data);",
+          "&ensp;&ensp; port1.postMessage(obj);",
+          "&ensp; });",
+          "}",
+          "asyncClone(o1).then(o8 => console.log(o8.b.r)); /* @Date */"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"fp-funcion-pura",
+    "name":"Pureza de funciones",
+    "topic":"Funciones Puras",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Son el equivalente a las funciones matemáticas tipo <strong>y=fn(x)</strong>, y cumplen con:"
+      },
+      {
+        "type":"ul",
+        "text": [
+          "1. No guardar estado",
+          "2. No usar condiciones de entorno (autónomas)",
+          "3. No generar un efecto lateral",
+          "4. No modificar el valor original del parámetro"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Por esas características son fáciles de probar, ubicar y compartir"
+      },
+      {
+        "type": "code",
+        "text": ["const sumFirst = (a, b) => a[0] + b[0];"]
+      }
+    ]
+  },
+  {
+    "id":"fp-funcion-impura",
+    "name":"Pureza de funciones",
+    "topic":"Funciones Impuras",
+    "contents":[
+      {
+        "type":"p",
+        "text":" No cumplen con al menos una de las reglas de las puras"
+      },
+      {
+        "type":"p",
+        "text":" 'Romper' cada una de las reglas, tiene un propósito práctico. Que conviene minimizar, y se relacionan con:"
+      },
+      {
+        "type":"p",
+        "text":"1. El concepto de componente, está íntimamamente ligado a la capacidad de manejar estados."
+      },
+      {
+        "type":"code",
+        "text": [
+          "const luminaire = () => {",
+          "&ensp; let turned = 'off';",
+          "&ensp; return {",
+          "&ensp;&ensp; toggle: () => {",
+          "&ensp;&ensp;&ensp; turned = (turned === 'off') ? 'on' : 'off';",
+          "&ensp;&ensp;&ensp; return turned;",
+          "&ensp;&ensp;};",
+          "&ensp;};",
+          "};",
+          "const KitchenTopLamp = luminaire();",
+          "KitchenTopLamp.toggle();"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"2. Una función dentro de un ámbito léxico o bloque, permite no repetir acciones que usen las variables del contexto"
+      },
+      {
+        "type": "code",
+        "text": [
+          "((c) =&gt; {",
+          "&ensp; const byC = (a) => a * c;",
+          "&ensp; /* ... */",
+          "})(3);"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"3. Los efectos laterales, como llamadas a APIs, guardado de base de datos, manipulación del DOM y demás, tienen que hacerse en algún lado."
+      },
+      {
+        "type":"p",
+        "text":"&ensp; - Ubicar los efectos dentro de funciones permiten una programación declarativa y por tanto más escalable, mantenible, etc."
+      },
+      {
+        "type":"p",
+        "text":"&ensp; - Como buena práctica, conviene que cada tipo de efecto se maneje con distintas funciones."
+      },
+      {
+        "type": "code",
+        "text": [
+          "const sendName = (name) => fetch(`/api/attachName/${name}`, {method: 'POST'});"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"4. Mutar el valor original del argumento sirve para evitar la duplicación de datos y con ello no aumentar el uso de memoria. Si bien esta práctica era común en el pasado, actualmente se tiende por la inmutabilidad, ya que facilita el mantenimiento y la independencia de la función"
+      },
+      {
+        "type": "code",
+        "text": [
+          "function convertCurrency(data, factor) {",
+          "&ensp; for(let i=0; i &lt; data.length; i++) {",
+          "&ensp;&ensp; data&#91;i&#93;.invoice.currency *= factor;",
+          "&ensp; }",
+          "}",
+          "const allData = await fetch('/api/getEmAll')",
+          "convertCurrency(allData, 0.17);"
+        ]
+      }
+    ]
+  },
+  {
+    "id":"fp-funcion-superior",
+    "name":"Pureza de funciones",
+    "topic":"Funciones de orden superior",
+    "contents":[
+      {
+        "type":"p",
+        "text":"Sirven para elevar un nivel de abstracción. O sea para reutilizar, tareas que se repiten en distintas funciones."
+      },
+      {
+        "type":"p",
+        "text":"Reciben una función para prepararla, o devuelven una función preparada con esas tareas"
+      },
+      {
+        "type":"p",
+        "text":"De forma nativa, Array.prototype tiene varias funciones de orden superior como map, filter, find o reduce entre otros."
+      },
+      {
+        "type":"h2",
+        "text":"Explicación"
+      },
+      {
+        "type":"p",
+        "text":"Dada una petición a una API. Que respeta un patrón de manejo de errores"
+      },
+      {
+        "type": "code",
+        "text": [
+          "fetch('/points/bulkUpdate', {data: modified}).then(resp =&gt; {",
+          "&ensp; if (resp.errors && resp.errors.length) {",
+          "&ensp;&ensp; throw new Error(JSON.stringify(resp.errors.map( err =&gt; err.message)));",
+          "&ensp; }",
+          "&ensp; if (typeof resp.data === 'undefined') {",
+          "&ensp;&ensp; throw new Error('&#91;\"Bad Response format\"&#93;');",
+          "&ensp; }",
+          "&ensp; const data = (!Array.isArray(resp.data)) ? &#91;resp.data&#93; : resp.data;",
+          "&ensp; data",
+          "&ensp;&ensp; .filter(daton =&gt; daton.updated)",
+          "&ensp;&ensp; .forEach( elm =&gt; {",
+          "&ensp;&ensp;&ensp; document.querySelector(`&#91;data-point=\"${elm.coords}\"&#93;`).classList.add('blink')",
+          "&ensp;&ensp;&ensp; document.querySelector(`.data-table &#91;data-elm=\"${elm.id}\"&#93;`).classList.add('updated');",
+          "&ensp;&ensp; }",
+          "&ensp; return data.map(daton =&gt; daton.id);",
+          "}).catch(showErrors);"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Y otra petición"
+      },
+      {
+        "type": "code",
+        "text": [
+          "fetch('/points/bulkDelete', {data: deleted}).then(resp =&gt; {",
+          "&ensp; if (resp.errors && resp.errors.length) {",
+          "&ensp;&ensp; throw new Error(JSON.stringify(resp.errors.map( err =&gt; err.message)));",
+          "&ensp; }",
+          "&ensp; if (typeof resp.data === 'undefined') {",
+          "&ensp;&ensp; throw new Error('&#91;\"Bad Response format\"&#93;');",
+          "&ensp; }",
+          "&ensp; const data = (!Array.isArray(resp.data)) ? &#91;resp.data&#93; : resp.data;",
+          "&ensp; const parsed = data",
+          "&ensp;&ensp; .filter(daton =&gt; daton.deleted)",
+          "&ensp;&ensp; .map(daton => daton.id);",
+          "&ensp; parsed.forEach( id =&gt; {",
+          "&ensp;&ensp; const elm = document.querySelector(`&#91;data-point=\"${id}\"&#93;`);",
+          "&ensp;&ensp; elm.parentNode.removeChild(elm);",
+          "&ensp; });",
+          "&ensp; return parsed;",
+          "}).catch(showErrors);"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Considerando que contienen muchas similitudes, se puede abstraer"
+      },
+      {
+        "type": "code",
+        "text": [
+          "function parseBulkResponse(resp, action) {",
+          "&ensp; if (resp.errors && resp.errors.length) {",
+          "&ensp;&ensp; throw new Error(JSON.stringify(resp.errors.map( err =&gt; err.message)));",
+          "&ensp; }",
+          "&ensp; if (typeof resp.data === 'undefined') {",
+          "&ensp;&ensp; throw new Error('&#91;\"Bad Response format\"&#93;');",
+          "&ensp; }",
+          "&ensp; const data = (!Array.isArray(resp.data)) ? &#91;resp.data&#93; : resp.data;",
+          "&ensp; const parsed = data",
+          "&ensp;&ensp; .filter(daton =&gt; daton.deleted)",
+          "&ensp; return (doEach) => parsed.map(doEach);",
+          "};"
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Con los que las peticiones quedan en"
+      },
+      {
+        "type": "code",
+        "text": [
+          "fetch('/points/bulkUpdate', {data: updated}).then(resp =&gt; {",
+          "&ensp; const toParse = parseBulkResponse(resp, 'updated');",
+          "&ensp; return toParse(daton =&gt; {",
+          "&ensp;&ensp; document.querySelector(`&#91;data-point=\"${daton.id}\"&#93;`).classList.add('updated')",
+          "&ensp;&ensp; return daton.id;",
+          "&ensp; });",
+          "}).catch(showErrors);",
+          "fetch('/points/bulkDelete', {data: deleted}).then(resp =&gt; {",
+          "&ensp; const toParse = parseBulkResponse(resp, 'deleted');",
+          "&ensp; return toParse(daton =&gt; {",
+          "&ensp;&ensp; const elm = document.querySelector(`&#91;data-point=\"${id}\"&#93`);",
+          "&ensp;&ensp; elm.parentNode.removeChild(elm);",
+          "&ensp;&ensp; return daton.id;",
+          "&ensp; });",
+          "}).catch(showErrors);"
+
+        ]
+      },
+      {
+        "type":"p",
+        "text":"Otros Ejemplos"
+      },
+      {
+        "type": "code",
+        "text": [
+          "function repeat(n, action) {",
+          "&ensp; for(let i = 0; i &lt; n; i++) {",
+          "&ensp;&ensp; action(i);",
+          "&ensp; }",
+          "}",
+          "repeat(4, i => console.log('Step is: ' + (i + 1)));"
+        ]
+      },
+      {
+        "type": "code",
+        "text": [
+          "function noisy(f) {",
+          "&ensp; return (...args) =&gt; {",
+          "&ensp;&ensp; let result = f(...args);",
+          "&ensp;&ensp; console.log('called with', args, ', returned', result);",
+          "&ensp;&ensp; return result;",
+          "&ensp; }",
+          "}",
+          "noisy(Math.min)(3, 2, 1);"
+        ]
+      }
+    ]
   }
 ]
 
