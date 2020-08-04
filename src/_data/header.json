@@ -3,158 +3,46 @@
     "name":"Intro",
     "topics":[
       {
-        "id":"what-is-es6",
-        "name":"Qué es ES6?"
+        "id":"what-is-OOP",
+        "name":"Qué es la Programación Orientada a Objetos?"
       },
       {
-        "id":"es6-use",
-        "name":"ES6 Implementation"
+        "id":"OOP-history",
+        "name":"Historia"
       }
     ]
   },
   {
-    "name":"Features que introdujo ES6",
+    "name":"Principios de OOP",
     "topics":[
       {
-        "id":"let-const",
-        "name":"Let y Const"
+        "id":"encapsulation",
+        "name":"Encapsulación"
       },
       {
-        "id":"enhanced-obj-literals",
-        "name":"Enhanced Object Literals"
+        "id":"abstraction",
+        "name":"Abstracción"
       },
       {
-        "id":"template-literals",
-        "name":"Template Literals"
+        "id":"inheritance",
+        "name":"Herencia"
       },
       {
-        "id":"arrow-functions",
-        "name":"Arrow functions"
-      },
-      {
-        "id":"default-params",
-        "name":"Default Params"
-      },
-      {
-        "id":"rest-param",
-        "name":"Rest params"
-      },
-      {
-        "id":"spread-operator",
-        "name":"Spread operator"
-      },
-      {
-        "id":"object-array-destructuring",
-        "name":"Object / Array destructuring"
-      },
-      {
-        "id":"es6-modules",
-        "name":"ES6 Modules"
-      },
-      {
-        "id":"es6-promises",
-        "name":"Promises"
-      },
-      {
-        "id":"es6-classes",
-        "name":"Classes"
-      },
-      {
-        "id":"map-set-weakmap-weakset",
-        "name":"map + set + weakmap + weakset"
-      },
-      {
-        "id":"math-number-string-array-objAPI",
-        "name":"math + number + string + array + object APIs"
+        "id":"polymorph",
+        "name":"Polimorfismo"
       }
     ]
   },
   {
-    "name":"Modern Features"
-  },
-  {
-    "name":"ES7",
-    "isSubSection": true,
+    "name":"Tipos de OOP",
     "topics":[
       {
-        "id":"array-includes",
-        "name":"Array.prototype.includes()"
+        "id":"class-based",
+        "name":"Basada en Clases"
       },
       {
-        "id":"exponentiation-operator",
-        "name":"Exponentiation operator"
-      }
-    ]
-  },
-  {
-    "name":"ES8",
-    "isSubSection": true,
-    "topics":[
-      {
-        "id":"async-func",
-        "name":"Async Functions"
-      },
-      {
-        "id":"objct-values-entries",
-        "name":"Object.values / entries"
-      }
-    ]
-  },
-  {
-    "name":"ES9",
-    "isSubSection": true,
-    "topics":[
-      {
-        "id":"async-iteration",
-        "name":"Asynchronous Iteration"
-      },
-      {
-        "id":"rest-spread-properties",
-        "name":"Rest/Spread Properties"
-      },
-      {
-        "id":"promise-finally",
-        "name":"Promise.finally"
-      }
-    ]
-  },
-  {
-    "name":"ES10",
-    "isSubSection": true,
-    "topics":[
-      {
-        "id":"array-flattening",
-        "name":"Array.flat() & Array.flatMap()"
-      },
-      {
-        "id":"object-fromEntries",
-        "name":"Object.fromEntries()"
-      },
-      {
-        "id":"trim-start-end",
-        "name":"TrimStart() and TrimEnd()"
-      }
-    ]
-  },
-  {
-    "name":"ES11",
-    "isSubSection": true,
-    "topics":[
-      {
-        "id":"optional-chaining",
-        "name":"Optional Chaining"
-      },
-      {
-        "id":"nullish-coalescing-operator",
-        "name":"Nullish Coalescing Operator"
-      },
-      {
-        "id":"globalthis",
-        "name":"globalThis"
-      },
-      {
-        "id":"dynamic-imports",
-        "name":"Dynamic Imports"
+        "id":"object-based",
+        "name":"Basada en Objetos"
       }
     ]
   }
